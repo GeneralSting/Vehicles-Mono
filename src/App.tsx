@@ -1,11 +1,14 @@
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import { routes } from "./routes";
 
-function App() {
+const App = () => {
   return (
-    <>
-      <h1>Vehicles-Mono</h1>
-    </>
-  )
-}
+    <Routes>
+      {routes.map((route, index) => (
+        <Route key={index} path={route.path} element={route.element} />
+      ))}
+    </Routes>
+  );
+};
 
-export default App
+export default App;
