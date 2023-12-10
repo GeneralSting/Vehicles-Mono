@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { useVehicleModelStore } from "../../hooks/useVehicleModelStore";
 
 // sorting and pagination of models table content
-const TablePagination: React.FC = observer(() => {
+const SortingOptions: React.FC = observer(() => {
   const vehicleModelStore = useVehicleModelStore();
 
   const updateTableContent = (
@@ -88,4 +88,4 @@ const TablePagination: React.FC = observer(() => {
   );
 });
 
-export default TablePagination;
+export default SortingOptions;

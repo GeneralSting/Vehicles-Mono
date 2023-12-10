@@ -1,4 +1,4 @@
-import TablePagination from "./TablePagination";
+import SortingOptions from "./SortingOptions";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
 import VehicleModelsTableProps from "../../interfaces/VehicleModelsTableProps";
@@ -42,7 +42,7 @@ const VehicleModelsTable: React.FC<VehicleModelsTableProps> = observer(
             ))}
           </tbody>
         </table>
-        {!vehicleModelStore.searchedModels && <TablePagination />}
+        {!vehicleModelStore.searchedModels && <SortingOptions />}
       </>
     );
   }

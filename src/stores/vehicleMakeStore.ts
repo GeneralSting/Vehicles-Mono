@@ -32,6 +32,17 @@ export default class VehicleMakeStoreImpl extends VehicleStore {
       this.setStatus(getErrorMessage(error, "Fetching makes error"));
     }
   };
+
+  public getSortedMakes = async () => {
+    try {
+      this.setIsLoading(true);
+      const vehicleMakes = await this.vehicleMakeService.fetchSortedMakes();
+      this.setMakesData(vehicleMakes);
+      this.setIsLoading(false);
+    } catch (error) {
+      this.setStatus(getErrorMessage(error, "Fetching sorted makes error"));
+    }
+  };
 }
 
 export const VehicleMakeStore = new VehicleMakeStoreImpl();

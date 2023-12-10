@@ -129,6 +129,12 @@ class VehicleModelService extends VehicleService {
       ? (Object.values(vehicleModels) as VehicleModel[])
       : null;
   };
+
+  public postModel = async (newModel: VehicleModel): Promise<Response> => {
+    const apiUrl = `${this.vehicleModelsPath}.json`;
+    const response = await this.actionVehicle(apiUrl, "POST", newModel);
+    return response;
+  };
 }
 
 export default VehicleModelService;

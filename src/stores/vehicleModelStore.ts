@@ -158,6 +158,32 @@ export class VehicleModelStoreImpl extends VehicleStore {
       this.setStatus(getErrorMessage(error, "Fetching models error: "));
     }
   };
+
+  // sorting by name and pagination are difficult if there are multiple identical names
+  // that's why this check was created
+  public checkEqualModel = async (
+    searchedPropertyName: string,
+    searchedPropertyValue: string
+  ): Promise<boolean> => {
+    try {
+      const vehicleModel: VehicleModel[] | null =
+        await this.vehicleModelService.fetchModelByProperty(
+          searchedPropertyName,
+          searchedPropertyValue
+        );
+      return vehicleModel?.length ? true : false;
+    } catch (error) {
+      this.setStatus(
+        getErrorMessage(error, "Checking equal model property error: ")
+      );
+      return false;
+    }
+  };
+
+  public createModel = async (newModel: VehicleModel): Promise<boolean> => {
+    const response = await this.vehicleModelService.postModel(newModel);
+    return response.status === 200 ? true : false;
+  };
 }
 
 // store and share an instance of "VehicleModelStoreImpl"

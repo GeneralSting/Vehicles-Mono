@@ -5,6 +5,8 @@ import { VehicleModelFormOperation } from "../types/VehicleModelFormOperation";
 import { VehicleModel } from "../interfaces/VehicleModel";
 import validatorjs from "validatorjs";
 import { VehicleModelFields } from "../interfaces/VehicleModelFields";
+import alertMessage from "../utils/AlertMessage";
+import { VehicleModelStore } from "../stores/vehicleModelStore";
 
 // Validator.getMessages(Validator.getDefaultLang()) return undefined, default lang is "en"
 Validator.setMessages(Validator.getDefaultLang(), {
@@ -34,7 +36,25 @@ export default class VehicleModelForm extends Form {
     this.$("MakeId").set("value", initialValues.MakeId || "");
   }
 
-  private async createModel() {}
+  private async createModel() {
+    try {
+      const { checkEqualModel, createModel } = VehicleModelStore;
+      const { Name } = this.values();
+
+      if (await checkEqualModel("Name", Name)) {
+        alertMessage("Model with the same name already exists!");
+        return;
+      }
+      const modelCreated = await createModel(this.values());
+      const message = modelCreated
+        ? "Successfully created model"
+        : "Model not created! Something went wrong";
+      alertMessage(message);
+      modelCreated && this.reset();
+    } catch (error) {
+      alertMessage("Model not created! Something went wrong");
+    }
+  }
 
   private async updateModel() {}
 
