@@ -10,7 +10,15 @@ const VehicleModelsTable: React.FC<VehicleModelsTableProps> = observer(
     const vehicleModelStore = useVehicleModelStore();
 
     const handleDelete = async (modelId: string) => {
-      alertMessage("Delete model: " + modelId);
+      try {
+        const modelDeleted = await vehicleModelStore.deleteModel(modelId);
+        const message = modelDeleted
+          ? "Model deleted"
+          : "Model not deleted! Something went wrong";
+        alertMessage(message);
+      } catch (error) {
+        console.log("Model not deleted! Something went wrong");
+      }
     };
     return (
       <>

@@ -144,6 +144,12 @@ class VehicleModelService extends VehicleService {
     const response = await this.actionVehicle(apiUrl, "PATCH", updatedModel);
     return response;
   };
+
+  public deleteModel = async (modelId: string): Promise<Response> => {
+    const apiUrl = `${this.vehicleModelsPath}${modelId}.json`;
+    const response = await this.actionVehicle(apiUrl, "DELETE");
+    return response;
+  };
 }
 
 export default VehicleModelService;

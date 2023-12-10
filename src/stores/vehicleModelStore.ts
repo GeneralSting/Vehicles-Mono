@@ -176,6 +176,19 @@ export class VehicleModelStoreImpl extends VehicleStore {
     return null;
   };
 
+  // When all displayed models (current pagination models) are deleted
+  // display the remaining models if there are any (previous pagination models)
+  private checkTotalModels = (deletedModelId: string) => {
+    if (this.totalModels === 0) {
+      return;
+    }
+    if (this.modelsData?.length === 0 && this.searchedModels === "") {
+      this.currentPage === 1
+        ? (this.setTotalModels(), this.getModels())
+        : (this.setTotalModels(), this.getModels(false, deletedModelId));
+    }
+  };
+
   // sorting by name and pagination are difficult if there are multiple identical names
   // that's why this check was created
   public checkEqualModel = async (
@@ -211,6 +224,20 @@ export class VehicleModelStoreImpl extends VehicleStore {
       updatedModel
     );
     return response.status === 200 ? true : false;
+  };
+
+  public deleteModel = async (modelId: string): Promise<boolean> => {
+    const response = await this.vehicleModelService.deleteModel(modelId);
+    const responseStatus = response.status === 200 ? true : false;
+    if (responseStatus) {
+      const remaningModels = this.modelsData
+        ? this.modelsData.filter((model) => model.Id !== modelId)
+        : null;
+      this.setModelsData(remaningModels);
+      await this.setTotalModels();
+      this.checkTotalModels(modelId);
+    }
+    return responseStatus;
   };
 }
 
