@@ -159,6 +159,23 @@ export class VehicleModelStoreImpl extends VehicleStore {
     }
   };
 
+  public getSingleModel = async (modelId: string | undefined) => {
+    if (modelId !== undefined) {
+      try {
+        this.setIsLoading(true);
+        const vehicleModel = await this.vehicleModelService.fetchSingleModel(
+          modelId
+        );
+
+        this.setIsLoading(false);
+        return vehicleModel;
+      } catch (error) {
+        this.setStatus(getErrorMessage(error, "Fetching single model error: "));
+      }
+    }
+    return null;
+  };
+
   // sorting by name and pagination are difficult if there are multiple identical names
   // that's why this check was created
   public checkEqualModel = async (
@@ -182,6 +199,17 @@ export class VehicleModelStoreImpl extends VehicleStore {
 
   public createModel = async (newModel: VehicleModel): Promise<boolean> => {
     const response = await this.vehicleModelService.postModel(newModel);
+    return response.status === 200 ? true : false;
+  };
+
+  public updateModel = async (
+    modelId: string,
+    updatedModel: VehicleModel
+  ): Promise<boolean> => {
+    const response = await this.vehicleModelService.patchModel(
+      modelId,
+      updatedModel
+    );
     return response.status === 200 ? true : false;
   };
 }

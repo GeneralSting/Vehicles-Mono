@@ -135,6 +135,15 @@ class VehicleModelService extends VehicleService {
     const response = await this.actionVehicle(apiUrl, "POST", newModel);
     return response;
   };
+
+  public patchModel = async (
+    modelId: string,
+    updatedModel: VehicleModel
+  ): Promise<Response> => {
+    const apiUrl = `${this.vehicleModelsPath}${modelId}.json`;
+    const response = await this.actionVehicle(apiUrl, "PATCH", updatedModel);
+    return response;
+  };
 }
 
 export default VehicleModelService;

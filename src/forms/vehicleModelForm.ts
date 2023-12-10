@@ -17,6 +17,7 @@ Validator.setMessages(Validator.getDefaultLang(), {
 
 export default class VehicleModelForm extends Form {
   private operation: VehicleModelFormOperation;
+  private model: VehicleModel | undefined;
   constructor(
     operation: VehicleModelFormOperation,
     model?: VehicleModel // Make the model parameter optional
@@ -26,6 +27,8 @@ export default class VehicleModelForm extends Form {
 
     // model update form requires default & values field properties values
     if (model) {
+      this.model = model;
+      this.setDefaultValues(model);
       this.setInitialValues(model);
     }
   }
@@ -34,6 +37,27 @@ export default class VehicleModelForm extends Form {
     this.$("Name").set("value", initialValues.Name || "");
     this.$("Abrv").set("value", initialValues.Abrv || "");
     this.$("MakeId").set("value", initialValues.MakeId || "");
+  }
+
+  // when model update is successful, set new default values
+  private setDefaultValues(defaultValues: VehicleModel) {
+    this.$("Name").set("default", defaultValues.Name);
+    this.$("Abrv").set("default", defaultValues.Abrv);
+    this.$("MakeId").set("default", defaultValues.MakeId);
+  }
+
+  // is there anything to update
+  private valuesChanged(): boolean {
+    return !(
+      this.$("Name").default === this.$("Name").value &&
+      this.$("Abrv").default === this.$("Abrv").value &&
+      this.$("MakeId").default === this.$("MakeId").value
+    );
+  }
+
+  // is the certain field property changed
+  private modelFieldChanged(field: string = "Name"): boolean {
+    return !(this.$(field).default === this.$(field).value);
   }
 
   private async createModel() {
@@ -56,7 +80,36 @@ export default class VehicleModelForm extends Form {
     }
   }
 
-  private async updateModel() {}
+  private async updateModel() {
+    if (!this.valuesChanged()) {
+      alertMessage("No change to update!");
+      return;
+    }
+    if (this.model === undefined) {
+      return;
+    }
+    try {
+      const { checkEqualModel, updateModel } = VehicleModelStore;
+      const { Name } = this.values();
+
+      if (
+        this.modelFieldChanged("Name") &&
+        (await checkEqualModel("Name", Name))
+      ) {
+        alertMessage("Model with the same name already exists!");
+        return;
+      }
+      const modelUpdated = await updateModel(this.model.Id, this.values());
+      const message = modelUpdated
+        ? "Successfully updated model"
+        : "Model not updated! Something went wrong";
+      alertMessage(message);
+      // Model is updated, new default values
+      modelUpdated && this.setDefaultValues(this.values());
+    } catch (error) {
+      alertMessage("Model not updated! Something went wrong");
+    }
+  }
 
   /*--- form configuration --- */
 
