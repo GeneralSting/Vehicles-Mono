@@ -9,9 +9,32 @@
   --white: #fff;
 }
 
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.btn-borderless {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 .centered-title {
   margin: 0 auto 2rem auto;
   text-align: center;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.btn-link-navigation {
+  /* Using display: contents removes the display box for the parent, 
+  replacing it with its children's boxes. */
+  display: contents;
 }
 
 .grid-container {
@@ -52,4 +75,27 @@
 
 .row-title button:hover {
   background-color: var(--btn-add-new-hover);
+}
+
+.table-vehicle-models {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table-vehicle-models th,
+.table-vehicle-models td {
+  border: 1px solid var(--table-border);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.table-vehicle-models th {
+  background-color: var(--table-headers);
+  color: var(--white);
+  text-align: center;
+}
+
+.model-name {
+  color: inherit;
 }

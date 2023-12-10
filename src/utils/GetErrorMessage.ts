@@ -3,6 +3,6 @@ export const getErrorMessage = (error: unknown, baseMessage: string) => {
     return `${baseMessage}: ${error.message}`;
   }
   return "";
-}
+};
 
 export default getErrorMessage;

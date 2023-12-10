@@ -41,7 +41,7 @@ abstract class VehicleService {
 
   // Every derived service will at the end call this function to fetch data
   protected async fetchVehicleData<TVehicle>(
-    url: string,
+    url: string
   ): Promise<TVehicle | null> {
     try {
       const response = await fetch(url);
@@ -59,28 +59,27 @@ abstract class VehicleService {
     method: ServiceActionMethod,
     vehicleData: VehicleMake | VehicleModel | null = null
   ): Promise<Response> {
-      const actionOptions: RequestInit = {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(vehicleData),
-      };
-      const actionRequest = new Request(url, actionOptions);
-      const actionResponse = await fetch(actionRequest);
-      if (method === "POST" && vehicleData) {
-        const responseData = await actionResponse.json();
-        const generatedId = responseData.name; // 'name' is the key property in Firebase
-  
-        // Update the data object with the generated ID
-        vehicleData = { ...vehicleData, Id: generatedId };
-  
-        // PATCH request to update the object in the database with the generated ID
-        const patchUrl = url.replace(".json", `/${generatedId}.json`);
-        await this.actionVehicle(patchUrl, "PATCH", vehicleData);
-      }
-      return actionResponse;
+    const actionOptions: RequestInit = {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(vehicleData),
+    };
+    const actionRequest = new Request(url, actionOptions);
+    const actionResponse = await fetch(actionRequest);
+    if (method === "POST" && vehicleData) {
+      const responseData = await actionResponse.json();
+      const generatedId = responseData.name; // 'name' is the key property in Firebase
 
+      // Update the data object with the generated ID
+      vehicleData = { ...vehicleData, Id: generatedId };
+
+      // PATCH request to update the object in the database with the generated ID
+      const patchUrl = url.replace(".json", `/${generatedId}.json`);
+      await this.actionVehicle(patchUrl, "PATCH", vehicleData);
+    }
+    return actionResponse;
   }
 }
 

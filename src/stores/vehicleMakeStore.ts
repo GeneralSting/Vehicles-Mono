@@ -16,7 +16,7 @@ export default class VehicleMakeStoreImpl extends VehicleStore {
     });
   }
 
-  setVehicleMakes = (apiData: VehicleMake[] | null) => {
+  setMakesData = (apiData: VehicleMake[] | null) => {
     runInAction(() => {
       this.makesData = apiData;
     });
@@ -26,7 +26,7 @@ export default class VehicleMakeStoreImpl extends VehicleStore {
     try {
       this.setIsLoading(true);
       const vehicleMakes = await this.vehicleMakeService.fetchMakes();
-      this.setVehicleMakes(vehicleMakes);
+      this.setMakesData(vehicleMakes);
       this.setIsLoading(false);
     } catch (error) {
       this.setStatus(getErrorMessage(error, "Fetching makes error"));

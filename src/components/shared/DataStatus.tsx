@@ -1,5 +1,5 @@
 import React from "react";
-import {DisplayErrorProps} from "../../Interfaces/DataStatusProps";
+import { DisplayErrorProps } from "../../interfaces/DataStatusProps";
 
 // if there is value in provided errors, display them
 const DataStatus: React.FC<DisplayErrorProps> = ({ errors }) => {

@@ -19,13 +19,13 @@ abstract class VehicleStore {
   setIsLoading(isLoading: boolean) {
     runInAction(() => {
       this.isLoading = isLoading;
-    })
+    });
   }
 
   setStatus(status: string) {
     runInAction(() => {
       this.status = status;
-    })
+    });
   }
 }
 
