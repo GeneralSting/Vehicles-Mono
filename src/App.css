@@ -99,3 +99,30 @@
 .model-name {
   color: inherit;
 }
+
+.pagination-container {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+}
+
+.pagination-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.pagination-button {
+  flex: 1;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.pagination-row select {
+  padding: 0.5rem;
+}
+
+.select-sort-type {
+  margin-left: auto;
+}

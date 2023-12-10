@@ -1,10 +1,14 @@
+import TablePagination from "./TablePagination";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
 import VehicleModelsTableProps from "../../interfaces/VehicleModelsTableProps";
+import { useVehicleModelStore } from "../../hooks/useVehicleModelStore";
 import alertMessage from "../../utils/AlertMessage";
 
 const VehicleModelsTable: React.FC<VehicleModelsTableProps> = observer(
   ({ vehicleData }) => {
+    const vehicleModelStore = useVehicleModelStore();
+
     const handleDelete = async (modelId: string) => {
       alertMessage("Delete model: " + modelId);
     };
@@ -38,6 +42,7 @@ const VehicleModelsTable: React.FC<VehicleModelsTableProps> = observer(
             ))}
           </tbody>
         </table>
+        {!vehicleModelStore.searchedModels && <TablePagination />}
       </>
     );
   }
