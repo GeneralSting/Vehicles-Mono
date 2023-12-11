@@ -1,7 +1,7 @@
 import { VehicleMake } from "../interfaces/VehicleMake";
 import { VehicleModel } from "../interfaces/VehicleModel";
 import { ServiceActionMethod } from "../types/ServiceActionMethods";
-import getErrorMessage from "../utils/GetErrorMessage";
+import getErrorMessage from "../utils/getErrorMessage";
 
 abstract class VehicleService {
   protected abstract vehiclePath: string;

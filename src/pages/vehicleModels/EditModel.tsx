@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingMessage from "../../components/shared/LoadingMessage";
-import { default as UpdateModelForm } from "../../components/shared/VehicleModelForm";
+import { VehicleModelForm as UpdateModelForm } from "../../components/vehicleModels/";
 import DataStatus from "../../components/shared/DataStatus";
 import { observer } from "mobx-react";
 import { VehicleMakeStore } from "../../stores/vehicleMakeStore";

@@ -9,7 +9,7 @@ import {
 import { VehicleMakeStore } from "../../stores/vehicleMakeStore";
 import { useVehicleModelStore } from "../../hooks/useVehicleModelStore";
 import { VehicleData } from "../../interfaces/VehicleData";
-import mapVehicleData from "../../utils/MapVehicleData";
+import mapVehicleData from "../../utils/mapVehicleData";
 import VehicleModelsTable from "../../components/vehicleModels/VehicleModelsTable";
 
 const Models = observer(() => {

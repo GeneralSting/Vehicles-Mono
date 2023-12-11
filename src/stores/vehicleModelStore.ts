@@ -3,11 +3,11 @@ import { createContext } from "react";
 import VehicleStore from "./vehicleStore";
 import VehicleModelService from "../services/vehicleModelService";
 import { VehicleModel } from "../interfaces/VehicleModel";
-import getTotalPages from "../utils/GetTotalPages";
-import getErrorMessage from "../utils/GetErrorMessage";
-import capitalizeFirstLetter from "../utils/CapitalizeFirstLetter";
+import getTotalPages from "../utils/getTotalPages";
+import getErrorMessage from "../utils/getErrorMessage";
+import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 import { SortTypeInfo } from "../types/SortTypeInfo";
-import StringIntoBoolean from "../utils/StringIntoBoolean";
+import StringIntoBoolean from "../utils/stringIntoBoolean";
 
 export class VehicleModelStoreImpl extends VehicleStore {
   vehicleModelService = new VehicleModelService();

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
 import VehicleModelsTableProps from "../../interfaces/VehicleModelsTableProps";
 import { useVehicleModelStore } from "../../hooks/useVehicleModelStore";
-import alertMessage from "../../utils/AlertMessage";
+import alertMessage from "../../utils/alertMessage";
 
 const VehicleModelsTable: React.FC<VehicleModelsTableProps> = observer(
   ({ vehicleData }) => {

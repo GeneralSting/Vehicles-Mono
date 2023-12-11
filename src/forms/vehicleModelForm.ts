@@ -5,8 +5,8 @@ import { VehicleModelFormOperation } from "../types/VehicleModelFormOperation";
 import { VehicleModel } from "../interfaces/VehicleModel";
 import validatorjs from "validatorjs";
 import { VehicleModelFields } from "../interfaces/VehicleModelFields";
-import alertMessage from "../utils/AlertMessage";
 import { VehicleModelStore } from "../stores/vehicleModelStore";
+import alertMessage from "../utils/alertMessage";
 
 // Validator.getMessages(Validator.getDefaultLang()) return undefined, default lang is "en"
 Validator.setMessages(Validator.getDefaultLang(), {

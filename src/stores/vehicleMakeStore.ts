@@ -1,7 +1,7 @@
 import { makeObservable, observable, runInAction } from "mobx";
 import { VehicleMake } from "../interfaces/VehicleMake";
 import VehicleMakeService from "../services/vehicleMakeService";
-import getErrorMessage from "../utils/GetErrorMessage";
+import getErrorMessage from "../utils/getErrorMessage";
 import VehicleStore from "./vehicleStore";
 
 export default class VehicleMakeStoreImpl extends VehicleStore {

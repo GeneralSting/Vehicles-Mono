@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useCallback, useEffect, useMemo } from "react";
 import LoadingMessage from "../../components/shared/LoadingMessage";
-import { default as NewModelForm } from "../../components/shared/VehicleModelForm";
+import { VehicleModelForm as NewModelForm } from "../../components/vehicleModels/";
 import DataStatus from "../../components/shared/DataStatus";
 import VehicleModelForm from "../../forms/vehicleModelForm";
 import { VehicleMakeStore } from "../../stores/vehicleMakeStore";
